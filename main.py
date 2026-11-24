@@ -17,7 +17,16 @@ ENTRY = (
 )
 
 
+GATE_MIN_CHARS = 1
+GATE_MAX_CHARS = 200
+
+
 def main() -> None:
+    if not GATE_MIN_CHARS <= len(ENTRY) <= GATE_MAX_CHARS:
+        raise SystemExit(
+            f"entry is {len(ENTRY)} chars, outside the "
+            f"{GATE_MIN_CHARS}-{GATE_MAX_CHARS} gate"
+        )
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(ENTRY)
